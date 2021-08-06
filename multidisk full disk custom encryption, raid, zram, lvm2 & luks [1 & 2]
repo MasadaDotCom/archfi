@@ -2,10 +2,8 @@
 
 
 #Archfi multidisk full disk encryption guide w/ raid-linear mdadm, ZRam lvm2 & luks(1 & 2)
-
-#Fork by:king masada
-
-#Archfi_Creator:Matmoul
+ Fork_author: king masada
+   #Archfi_Creator: Matmoul
 
 
 
