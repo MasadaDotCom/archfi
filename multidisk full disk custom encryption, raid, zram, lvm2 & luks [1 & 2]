@@ -22,10 +22,12 @@ First, boot with the [last Arch Linux image](https://www.archlinux.org/download/
 
 Then make sure you have Internet connection on the Arch iso. If you have a wireless connection the [`iwctl`](https://wiki.archlinux.org/index.php/Iwd#iwctl) command might be useful to you. You can also read the [Network configuration](https://wiki.archlinux.org/index.php/Network_configuration) from the Arch Linux guide for more detailed instructions
 
---EXAMPLE--
 
 
-Parted -a optimal /dev/sda
+#--EXAMPLE--
+
+
+#Parted -a optimal /dev/sda
 
 Mklabel gpt
 
@@ -47,7 +49,7 @@ q
 
 
 
-Parted -a optimal /dev/sdb
+#Parted -a optimal /dev/sdb
 
 Mklabel gpt
 
@@ -62,7 +64,7 @@ p
 q
 
 
-Parted -a optimal /dev/sdc
+#Parted -a optimal /dev/sdc
 
 Mklabel gpt
 
@@ -76,20 +78,22 @@ p
 
 q
 
-(Do this ^ for all disks you wish to merge)
+
+#(Do this ^ for all disks you wish to merge)
 
 
 
-Modprobe dm-crypt
+#Modprobe dm-crypt
+
 
 
 git clone git://git.kernel.org/pub/scm/utils/mdadm/mdadm.git
 
 
-modprobe mdadm
+#modprobe mdadm
 
 
-mdadm --create --verbose /dev/md0 --level=linear --raid-devices=3 /dev/sda2 /dev/sdb1 /dev/sdc1
+#mdadm --create --verbose /dev/md0 --level=linear --raid-devices=3 /dev/sda2 /dev/sdb1 /dev/sdc1
 
 
 #cryptsetup -y -v -c serpent-xts-plain64be -h whirlpool -s 512 -i 5000 --use-urandom luksFormat /Dev/md0 (for luks, add "...luks --type luks2 /dev/md0 for the newest luks format) 
@@ -123,7 +127,7 @@ DO NOT ADD A FILESYSTEM TO LOGICAL VOLUMES OR LEAVE LOGICAL MOUNTED WHEN YOU BOO
 #swapoff /dev/mapper/vg-zram0
 
 
-Then download the script with from the command line:
+#Then download the script with from the command line:
 
     curl -LO archfi.sf.net/archfi
 
@@ -131,12 +135,12 @@ If SourceForge is down, use this instead:
 
     curl -LO matmoul.github.io/archfi
 
-Finally, launch the script:
+#Finally, launch the script:
 
     sh archfi
 
 
---- DO NOT ATTEMPT TO USE BTRFS FILESYSTEM AS IT IS NOT FULLY COMPATIBLE WITH ANY VERSION OF RAID!---
+#--- DO NOT ATTEMPT TO USE BTRFS FILESYSTEM AS IT IS NOT FULLY COMPATIBLE WITH ANY VERSION OF RAID!---
 
 once you reach disk partitioning/mounting, use only /dev/mapper/vg-{example_logical-volume}...for all but boot/efi partition (ex. SDA1) otherwise archfi will delete the raid, lvm & luks partitions, and you'll have to start over, as archfi is not locally compatible with lvm, custom encryption or raid filesystems.
 
@@ -153,6 +157,7 @@ Make sure you choose "DOS, DMRAID, LVM & REISERFS" WHEN PROMPTED TO CHOOSE A FIL
 
 
 Then follow the on-screen instructions to completion.
+
 
 If you require extra help, visit the provided video playlist and follow my example.
 
