@@ -16,57 +16,103 @@ First, boot with the [last Arch Linux image](https://www.archlinux.org/download/
 
 Then make sure you have Internet connection on the Arch iso. If you have a wireless connection the [`iwctl`](https://wiki.archlinux.org/index.php/Iwd#iwctl) command might be useful to you. You can also read the [Network configuration](https://wiki.archlinux.org/index.php/Network_configuration) from the Arch Linux guide for more detailed instructions
 
+
 Parted -a optimal /dev/sda
+
 Mklabel gpt
+
 Unit mib
+
 Mkpart.fat -F32 primary 1 513
+
 set 1 BOOT on
+
 set 1 esp on
+
 Mkpart.ext4 primary 513 -1
+
 set 2 lvm on
+
 p
+
 q
+
+
 
 Parted -a optimal /dev/sdb
+
 Mklabel gpt
+
 Unit mib
+
 Mkpart.ext4 primary 1 -1
+
 Set 1 lvm on
+
 p
+
 q
 
+
 Parted -a optimal /dev/sdc
+
 Mklabel gpt
+
 Unit mib
+
 Mkpart.ext4 primary 1 -1
+
 Set 1 lvm on
+
 p
+
 q
+
 (Do this ^ for all disks you wish to merge)
+
+
 
 Modprobe dm-crypt
 
+
 git clone git://git.kernel.org/pub/scm/utils/mdadm/mdadm.git
-modprove mdadm
+
+
+modprobe mdadm
+
+
 mdadm --create --verbose /dev/md0 --level=linear --raid-devices=3 /dev/sda2 /dev/sdb1 /dev/sdc1
 
-cryptsetup -y -v -c serpent-xts-plain64be -h whirlpool -s 512 -i 5000 --use-urandom luksFormat /Dev/md0 (for luks, add "...luks --type luks2 /dev/md0 for the newest luks format) 
-cryptsetup luksOpen /dev/md0 cryptlvm
-pvcreate /dev/mapper/cryptlvm
-vgcreate vg /dev/mapper/cryptlvm
-lvcreate -L +40G vg -n zram0
-lvcreate -L +100G vg -n root
-lvcreate --extents +95%FREE vg -n home
+
+#cryptsetup -y -v -c serpent-xts-plain64be -h whirlpool -s 512 -i 5000 --use-urandom luksFormat /Dev/md0 (for luks, add "...luks --type luks2 /dev/md0 for the newest luks format) 
+
+#cryptsetup luksOpen /dev/md0 cryptlvm
+
+#pvcreate /dev/mapper/cryptlvm
+
+#vgcreate vg /dev/mapper/cryptlvm
+
+#lvcreate -L +40G vg -n zram0
+
+#lvcreate -L +100G vg -n root
+
+#lvcreate --extents +95%FREE vg -n home
+
 
 DO NOT ADD A FILESYSTEM TO LOGICAL VOLUMES OR LEAVE LOGICAL MOUNTED WHEN YOU BOOT INTO ARCHFI, ARCHFI WILL NOT BE ABLE TO PROPERLY MOUNT THEM, AND YOU WONT BE ABLE TO GENERATE FILESYSTEM HOOKS!
 
-modprobe zram
 
-echo lz4 > /sys/block/zram0/comp_algorithm
-echo 40G > /sys/block/zram0/disksize
-mkswap --label zram0 /dev/mapper/vg-zram0
-swapon --priority 100 /dev/mapper/vg-zram0
-swapoff /dev/mapper/vg-zram0
+#modprobe zram
+
+#echo lz4 > /sys/block/zram0/comp_algorithm
+
+#echo 40G > /sys/block/zram0/disksize
+
+#mkswap --label zram0 /dev/mapper/vg-zram0
+
+#swapon --priority 100 /dev/mapper/vg-zram0
+
+#swapoff /dev/mapper/vg-zram0
 
 
 Then download the script with from the command line:
@@ -81,14 +127,19 @@ Finally, launch the script:
 
     sh archfi
 
+
 --- DO NOT ATTEMPT TO USE BTRFS FILESYSTEM AS IT IS NOT FULLY COMPATIBLE WITH ANY VERSION OF RAID!---
 
 once you reach disk partitioning/mounting, use only /dev/mapper/vg- for all but boot partition (ex. SDA1) otherwise archfi will delete the raid, lvm & luks partitions, and you'll have to start over, as archfi is not locally compatible with lvm, custom encryption or raid filesystems.
 
-MOUNT /DEV/SDA1 @ /BOOT [FAT32,EXT4]
-MOUNT /DEV/MAPPER/VG-ZRAM0 @ SWAP [SWAP]
-MOUNT /DEV/MAPPER/VG-ROOT @ ROOT [EXT2,EXT3, EXT4]
+#MOUNT /DEV/SDA1 @ /BOOT [FAT32,EXT4]
+
+#MOUNT /DEV/MAPPER/VG-ZRAM0 @ SWAP [SWAP]
+
+#MOUNT /DEV/MAPPER/VG-ROOT @ ROOT [EXT2,EXT3, EXT4]
+
 MOUNT /DEV/MAPPER/VG-HOME @ HOME [EXT2, EXT3, EXT4]
+
 
 Then follow the on-screen instructions to completion.
 
