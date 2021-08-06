@@ -132,7 +132,7 @@ Finally, launch the script:
 
 --- DO NOT ATTEMPT TO USE BTRFS FILESYSTEM AS IT IS NOT FULLY COMPATIBLE WITH ANY VERSION OF RAID!---
 
-once you reach disk partitioning/mounting, use only /dev/mapper/vg- for all but boot partition (ex. SDA1) otherwise archfi will delete the raid, lvm & luks partitions, and you'll have to start over, as archfi is not locally compatible with lvm, custom encryption or raid filesystems.
+once you reach disk partitioning/mounting, use only /dev/mapper/vg-{example_logical-volume}...for all but boot/efi partition (ex. SDA1) otherwise archfi will delete the raid, lvm & luks partitions, and you'll have to start over, as archfi is not locally compatible with lvm, custom encryption or raid filesystems.
 
 #MOUNT /DEV/SDA1 @ /BOOT [FAT32,EXT4]
 
