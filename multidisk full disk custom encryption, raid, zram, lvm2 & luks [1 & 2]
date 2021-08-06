@@ -4,7 +4,7 @@
 
 #Archfi multidisk full disk encryption guide
 
- -luks zram lvm raid multidrive encryption-
+           -luks zram lvm raid-
 
 
 
