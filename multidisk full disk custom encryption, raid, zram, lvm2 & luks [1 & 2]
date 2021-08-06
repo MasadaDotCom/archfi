@@ -1,9 +1,16 @@
 -------Kingdotcom------
 
+
 #Archfi multidisk full disk encryption guide w/ raid-linear mdadm, ZRam lvm2 & luks(1 & 2)
 
+#Fork by:king masada
 
 #Archfi_Creator:Matmoul
+
+
+
+
+#BEFORE WE BEGIN, IT IS HIGHLY RECOMMENDED GO CHOOSE "SYSTEMD_BOOT" AS THE DEFAULT BOOTLOADER OR CHOOSING LEGACY LUKS(1), AS GRUB & GRUB 2 HAVE TECHNICAL ISSUES DECRYPTING LUKS2, WHICH IS WHY IN THIS GUIDE WE ARE LEAVING THE BOOT PARTITION ONLY, UNENCRYPTED, INSTEAD OF DETACHED HEADER, OR ENCRYPTED BOOT...YOU HAVE BEEN WARNED!
 
 
 Just a simple bash script wizard to install Arch Linux after you have booted on the official Arch Linux install media.
@@ -156,6 +163,11 @@ MOUNT /DEV/MAPPER/VG-HOME @ HOME [EXT2, EXT3, EXT4]
 Make sure you choose "DOS, DMRAID, LVM & REISERFS" WHEN PROMPTED TO CHOOSE A FILESYSTEM, following Mkinitcpio refresh, choose at least "Linux" on this page, DO NOT CHOOSE HARDENED, ZEN, LTE SOLELY YET! you may choose a different header later on in the installation.
 
 ----PLEASE NOTE, YOU MAY NEED TO EDIT THE FSTAB, CRYPTTAB & GRUB CONF, BY PRESSING "EDIT" THIS BASH SCRIPT, WAS NOT MADE FOR THIS AMOUNT OF CUSTOMIZATION, IT WAS INTENDED TO BE QUICK & EASY, THEREFORE IT CAN BE CONSIDERED AN EXPLOIT, TO BE ABLE TO CUSTOMIZE IT THIS MUCH, BUT AGAIN, ITS NOT PERFECT AS IT WASNT DESIGNED FOR THE PURPOSE OF THIS GUIDE-----
+
+
+Notice/credits~ I apologize for any confusion in this guide,as I normally don't use GitHub for anything other than downloading, and despite the flaws, that need to be overcame to make my guide work, archfi is truly the best, despite lack of customization outside of point & click, if it wasn't for mat, I would not have become so into Arch, and currently Gentoo, and I'm posting this guide, to help others like myself, who wanted an an easy fde install, as well as to show my appreciation to Mat & his team for this simple script, that changed my outlook, and life to be frank, all credits go to Mat & the Archfi team.
+
+
 
 Should you have issues unlocking grub post install, you may need to reinstall via running "sudo curl -LO archdi.sf.net/archdi" followed by "sudo sh archdi" (second half of this installer, to fix the build HOOKS.
 
