@@ -16,6 +16,8 @@ First, boot with the [last Arch Linux image](https://www.archlinux.org/download/
 
 Then make sure you have Internet connection on the Arch iso. If you have a wireless connection the [`iwctl`](https://wiki.archlinux.org/index.php/Iwd#iwctl) command might be useful to you. You can also read the [Network configuration](https://wiki.archlinux.org/index.php/Network_configuration) from the Arch Linux guide for more detailed instructions
 
+--EXAMPLE--
+
 
 Parted -a optimal /dev/sda
 
@@ -139,6 +141,9 @@ once you reach disk partitioning/mounting, use only /dev/mapper/vg- for all but 
 #MOUNT /DEV/MAPPER/VG-ROOT @ ROOT [EXT2,EXT3, EXT4]
 
 MOUNT /DEV/MAPPER/VG-HOME @ HOME [EXT2, EXT3, EXT4]
+
+
+Make sure you choose "DOS, DMRAID, LVM & REISERFS" WHEN PROMPTED TO CHOOSE A FILESYSTEM, following Mkinitcpio refresh, choose at least "Linux" on this page, DO NOT CHOOSE HARDENED, ZEN, LTE SOLELY YET! you may choose a different header later on in the installation.
 
 
 Then follow the on-screen instructions to completion.
