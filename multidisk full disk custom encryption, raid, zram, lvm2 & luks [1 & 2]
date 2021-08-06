@@ -3,12 +3,13 @@
 
 #Archfi multidisk full disk encryption guide w/ raid-linear mdadm, ZRam lvm2 & luks(1 & 2)
 
-           #fork_by:king måsådå
+   #fork_by:king måsådå
   
-           #archfi_creator:Matmoul
+  #archfi_creator:Matmoul
 
 
 
+#HINT: a partition that archfi doesn't format or file downloaded after executing this script, while it's still running (ex. During a bigger file install, pressing f2 and switching to a new terminal while Archfi is running on F1) that aren't a part of this script (ex. Selinux) seem to stick so long as you don't format afterwards. ;D
 
 #BEFORE WE BEGIN, IT IS HIGHLY RECOMMENDED TO CHOOSE "SYSTEMD_BOOT" AS THE DEFAULT OR CHOOSING LEGACY LUKS(1), AS GRUB & GRUB 2 HAVE TECHNICAL ISSUES DECRYPTING LUKS2, WHICH IS WHY IN THIS GUIDE WE ARE LEAVING THE BOOT PARTITION ONLY, UNENCRYPTED, INSTEAD OF DETACHED HEADER, OR ENCRYPTED BOOT...YOU HAVE BEEN WARNED!
 
